@@ -9,7 +9,7 @@
   <meta name="msapplication-TileImage" content="img/favicon-32x32.png">
   <link rel="icon" href="img/favicon.ico" sizes="96x96" type="image/x-icon"/>
   
-  <title>Miningcore.WebUI</title>
+  <title>1miner.net - Mining Pool</title>
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">  
   <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon.png">
   
@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="css/chartist.min.css">
   <link rel="stylesheet" href="css/font-awesome-all.css">
   <link rel="stylesheet" href="css/themify-icons.css">
-<!--  <link rel="stylesheet" href="css/font-awesome-icons.css"> -->
   <link rel="stylesheet" href="css/font-awesome-icons.css">
   <link rel="stylesheet" href="css/miningcore.css">
   <link rel="stylesheet" href="css/miningcore-colors.css">
@@ -32,14 +31,317 @@
   <script src="js/chartist.min.js"></script>
   <script src="js/miningcore.js"></script>
 
-    <!-- CSS FOR STYLING THE PAGE -->
+    <!-- DARK MODERN THEME CSS - BLACK AND DARK BLUE -->
     <style>
+      :root {
+        --bg-primary: #000000;          /* Pure black background */
+        --bg-secondary: #0a0a1a;        /* Very dark blue, almost black */
+        --bg-tertiary: #0f1633;         /* Dark blue */
+        --bg-card: #0a0f2e;             /* Dark blue for cards */
+        --accent-primary: #00a8ff;      /* Bright blue accent */
+        --accent-secondary: #0066cc;    /* Medium blue accent */
+        --text-primary: #ffffff;        /* White text */
+        --text-secondary: #a0b3d9;      /* Light blue-gray text */
+        --border-color: #1a2855;        /* Dark blue border */
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+      }
+
+      body {
+        background-color: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      /* Header Styling */
+      .main-header, .navbar {
+        background: linear-gradient(180deg, #000000 0%, var(--bg-tertiary) 100%) !important;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        min-height: 50px;
+      }
+
+      /* Sidebar Styling */
+      .main-sidebar {
+        background-color: var(--bg-secondary) !important;
+        border-right: 1px solid var(--border-color);
+      }
+
+      .sidebar {
+        background-color: transparent !important;
+      }
+
+      .sidebar-menu > li > a {
+        color: var(--text-secondary) !important;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+      }
+
+      .sidebar-menu > li > a:hover,
+      .sidebar-menu > li.active > a {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--accent-primary) !important;
+        border-left-color: var(--accent-primary);
+      }
+
+      /* Card Styling */
+      .card {
+        background-color: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5) !important;
+        margin-bottom: 20px;
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, #000000 100%) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        color: var(--text-primary) !important;
+        border-radius: 12px 12px 0 0 !important;
+      }
+
+      .card-title {
+        color: var(--text-primary) !important;
+        font-weight: 600;
+      }
+
+      .card-body {
+        color: var(--text-primary) !important;
+      }
+
+      /* Info Box Styling */
+      .info-box {
+        background-color: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+      }
+
+      .info-box-icon {
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+        border-radius: 8px 0 0 8px !important;
+      }
+
+      .info-box-content {
+        color: var(--text-primary) !important;
+      }
+
+      .info-box-text {
+        color: var(--text-secondary) !important;
+      }
+
+      .info-box-number {
+        color: var(--text-primary) !important;
+        font-weight: 700;
+      }
+
+      /* Button Styling */
+      .btn {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        transition: all 0.3s ease !important;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+        border: none !important;
+        color: white !important;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 168, 255, 0.4) !important;
+      }
+
+      .btn-info {
+        background-color: var(--accent-secondary) !important;
+        border: none !important;
+      }
+
+      /* Table Styling */
+      .table {
+        color: var(--text-primary) !important;
+        border-collapse: separate !important;
+        border-spacing: 0 8px !important;
+      }
+
+      .table thead th {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--accent-primary) !important;
+        border: none !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 12px !important;
+      }
+
+      .table tbody tr {
+        background-color: var(--bg-secondary) !important;
+        transition: all 0.3s ease !important;
+      }
+
+      .table tbody tr:hover {
+        background-color: var(--bg-tertiary) !important;
+        transform: scale(1.02);
+      }
+
+      .table tbody td {
+        border: none !important;
+        padding: 12px !important;
+        vertical-align: middle !important;
+      }
+
+      /* Form Styling */
+      .form-control {
+        background-color: var(--bg-secondary) !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+      }
+
+      .form-control:focus {
+        border-color: var(--accent-primary) !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 168, 255, 0.25) !important;
+      }
+
+      /* Progress Bar Styling */
+      .progress {
+        background-color: var(--bg-secondary) !important;
+        border-radius: 8px !important;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+      }
+
+      /* Pool Coin Grid */
+      .pool-coin-card .card {
+        transition: all 0.3s ease !important;
+      }
+
+      .pool-coin-card .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 168, 255, 0.2) !important;
+        border-color: var(--accent-primary) !important;
+      }
+
+      /* Filter Buttons */
+      .filter-btn {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--text-secondary) !important;
+        border: 1px solid var(--border-color) !important;
+        margin: 5px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+        color: white !important;
+        border-color: transparent !important;
+      }
+
+      /* Logo Section Styling */
+      .logo {
+        background-color: var(--bg-tertiary) !important;
+        padding: 15px !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        text-align: center;
+      }
+
+      .logo a {
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
+      }
+
+      /* Footer Styling */
+      .main-footer, .main-index-footer {
+        background-color: #000000 !important;
+        border-top: 1px solid var(--border-color) !important;
+        color: var(--text-secondary) !important;
+        padding: 20px !important;
+      }
+
+      .main-footer a, .main-index-footer a {
+        color: var(--accent-primary) !important;
+        text-decoration: none !important;
+      }
+
+      /* Content Wrapper */
+      .content-wrapper {
+        background-color: var(--bg-primary) !important;
+      }
+
+      /* Stamps */
+      .stamp {
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+        color: white !important;
+      }
+
+      /* Effort Classes */
+      .effort1 { color: var(--success) !important; }
+      .effort2 { color: var(--warning) !important; }
+      .effort3 { color: var(--danger) !important; }
+
+      /* Tab Styling */
+      .tablinks, .tablinks1 {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--text-secondary) !important;
+        border: 1px solid var(--border-color) !important;
+        margin-right: 10px !important;
+        border-radius: 8px !important;
+      }
+
+      .tablinks.active, .tablinks1.active {
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+        color: white !important;
+        border-color: transparent !important;
+      }
+
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-secondary);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-primary);
+      }
+
+      /* Links */
+      a {
+        color: var(--accent-primary) !important;
+      }
+
+      a:hover {
+        color: var(--accent-secondary) !important;
+        text-decoration: none !important;
+      }
+
+      /* Container Calculators */
       .container-calculators {
         width: 90%;
         margin: auto;
         align-items: center;
         vertical-align: calc(50%);
       }
+
       #servers {
         display: flex;
         justify-content: space-between;
@@ -53,29 +355,223 @@
       }
 
       #servers li button {
-        background-color: #e83e8c;
+        background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
         color: white;
         border: none;
         padding: 10px 20px;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
       }
+
+      #servers li button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 168, 255, 0.4);
+      }
+
+      /* Alert Styling */
+      .alert {
+        border-radius: 8px !important;
+        border: none !important;
+      }
+
+      .alert-warning {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--warning) !important;
+        border: 1px solid var(--warning) !important;
+      }
+
+      /* Logo Styling */
+      img[src*="logo.gif"] {
+        transition: all 0.3s ease;
+      }
+
+      img[src*="logo.gif"]:hover {
+        filter: drop-shadow(0 0 30px rgba(0, 168, 255, 0.7)) brightness(1.1) !important;
+        transform: scale(1.08);
+      }
+
+      /* Loading Animation */
+      .loading-dot {
+        animation: loadingDot 1.4s infinite ease-in-out both;
+      }
+
+      @keyframes loadingDot {
+        0%, 80%, 100% {
+          opacity: 0;
+        }
+        40% {
+          opacity: 1;
+        }
+      }
+
+      /* Special styling for the main welcome card */
+      .main-index .card-shadow {
+        background: linear-gradient(135deg, #000000 0%, var(--bg-card) 100%) !important;
+        border: 1px solid var(--accent-primary) !important;
+      }
+      /* Server Ping Table Styles - Add to your existing <style> section */
+
+        /* Server ping table specific styles */
+#serverPingTable {
+    margin-bottom: 0;
+}
+
+#serverPingTable tbody tr {
+    transition: all 0.3s ease;
+}
+
+#serverPingTable tbody tr:hover {
+    transform: scale(1.01);
+    background-color: var(--bg-tertiary) !important;
+}
+
+.best-server {
+    background-color: rgba(0, 168, 255, 0.1) !important;
+    border-left: 3px solid var(--accent-primary);
+}
+
+/* Rank badge styling */
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rank-best {
+    background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%) !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-online {
+    color: var(--success);
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.status-timeout {
+    color: var(--warning);
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.status-error {
+    color: var(--danger);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.status-connecting {
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+}
+
+/* Ping cell styling */
+.ping-cell {
+    position: relative;
+}
+
+.ping-cell span {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Ping quality indicator */
+.ping-quality {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.ping-excellent {
+    background-color: var(--success);
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+}
+
+.ping-good {
+    background-color: #10b981;
+}
+
+.ping-fair {
+    background-color: var(--warning);
+}
+
+.ping-poor {
+    background-color: var(--danger);
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+}
+
+/* Loading animation */
+.loading-container {
+    padding: 40px 0;
+    color: var(--text-secondary);
+}
+
+.loading-container i {
+    font-size: 2rem;
+    color: var(--accent-primary);
+    margin-right: 10px;
+}
+
+/* Badge styling */
+.badge-success {
+    background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Region flags */
+#serverPingTable td:nth-child(3) {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #serverPingTable {
+        font-size: 0.85rem;
+    }
+    
+    .rank-badge {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .badge-success {
+        display: none;
+    }
+}
     </style>
 </head>
 
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the desired effect
-===========================================================
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-===========================================================
--->
 <body class="skin-black" style="height: auto; min-height: 100%;" onhashchange="loadIndex()">
 <!-- COIN TABLE TEMPLATE -->
 	<div class="index-coin-table-template" style="display:none;">
@@ -108,9 +604,9 @@ Apply one or more of the following classes to get the desired effect
 <!-- SIDEBAR TEMPLATE -->	
 	<div class="sidebar-template" style="display:none;">
 		<div class="logo">
-          		<a href="#" class="simple-text logo-normal">
+			<a href="#" class="simple-text logo-normal">
 				<p>{{ coinLogo }} {{ coinName }}</p>
-		  	</a>
+			</a>
         	</div>
 
 		<ul class="sidebar-menu tree" data-widget="tree">
@@ -167,8 +663,9 @@ Apply one or more of the following classes to get the desired effect
 <!-- INDEX HEADER  -->
 <header class="main-index-header fixed">
 	<nav class="navbar navbar-static-top" role="navigation">
-		<a></a>
-		<span class="header-text"><b>Miningcore</b> - making mining easy</span>
+		<a href="#" style="display: flex; align-items: center; text-decoration: none;">
+		</a>
+		<span class="header-text"><b>1MINER.NET</b> - Mining Made Easy </span>
 		<a></a>
 	</nav>
 </header>
@@ -178,21 +675,27 @@ Apply one or more of the following classes to get the desired effect
 		<div class="content container-fluid " >	
 			<div class="col-12">
 				<div class="card card-shadow">
-					<div class="card-header">
-						<h5 class="card-title text-center">Welcome to Miningcore Mining Pool</h5>
+					<div class="card-header" style="background: transparent; border: none;">
+						<div style="text-align: center; padding: 40px 0;">
+							<img id="animatedGif" src="img/logo.gif" alt="1miner.net" style="width: min(50vw, 600px); height: auto;">
+						</div>
 					</div>
 					<div class="card-body p-0">
 						</br>
 						<center>
-						<p>
-						Low fee, high performance and a nice design. </br> Pick a coin, connect you miner and make some coins.
+						<p style="color: var(--text-secondary); font-size: 1.1rem;">
+						Next-generation mining with real-time monitoring.</br>Connect your miner and stack your bag.
 						</p>
 						</center>
 						</br>
 					</div>
-					<div class="card-footer">
-						<div class="card-title text-center"><img style="width:150px;" src="img/discord.png" alt="Discord"></div>
-					</div>
+					<div class="card-footer" style="background: transparent; border-top: 1px solid var(--border-color);">
+  						<div class="card-title text-center">
+   							 <a href="https://discord.gg/ZyG3YKDCQQ" target="_blank">
+     								 <img style="width:150px;" src="img/discord.png" alt="Discord">
+   								 </a>
+ 							 </div>
+						</div> 
 				</div>
 			</div>
 			</br>
@@ -200,7 +703,7 @@ Apply one or more of the following classes to get the desired effect
 				<div class="card">
 					<div class="card-header">
 						<div class="card-title text-center">
-							<span><img src="img/slogan.png"></span>
+							<h3 style="color: var(--accent-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Select Your Mining Algorithm</h3>
 						</div>
 					</div>
 					<div class="card-body">
@@ -213,9 +716,49 @@ Apply one or more of the following classes to get the desired effect
 		</div>
 	</div>	
 <br>
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title text-center">
+                <h3 style="color: var(--accent-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
+                    <i class="fas fa-server"></i> Server Latency Monitor
+                </h3>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 0.9rem;">
+                    Real-time connection speed to our global mining servers
+                </p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="serverPingTable">
+                    <thead class="text-primary">
+                        <tr>
+                            <th style="width: 10%;">Rank</th>
+                            <th style="width: 35%;">Server Location</th>
+                            <th style="width: 20%;">Region</th>
+                            <th style="width: 20%;">Latency</th>
+                            <th style="width: 15%;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serverPingList">
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="loading-container">
+                                    <i class="fas fa-spinner fa-spin"></i> Initializing server connections...
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+	  
 <!-- INDEX FOOTER --> 
     <footer class="main-index-footer">
-		<strong><a target="_blank" href="https://github.com/xiaolin1579/Miningcore.WebUI">&copy; <script>document.write(new Date().getFullYear())</script> made by EvePool.pw</a></strong>
+		<strong><a target="_blank" href="https://1miner.net">&copy; <script>document.write(new Date().getFullYear())</script> 1miner.net - Made By DankMiner</a></strong>
     </footer>
 
   </div>
@@ -239,7 +782,6 @@ Apply one or more of the following classes to get the desired effect
     <header class="main-header">
 		<nav class="navbar navbar-static-top" role="navigation">
 			<a></a>
-			<a href="#"><img src="img/logo.png"></a>
 			<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="fas fa-bars"></i></a>
 		</nav>
     </header>
@@ -254,7 +796,7 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-lg-6 col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title"><span class="stamp stamp-md bg-green mr-3"><i class="fas fa-wave-square"></i></span>Pool Hashrate</h>
+							<h5 class="card-title"><span class="stamp stamp-md mr-3"><i class="fas fa-wave-square"></i></span>Pool Hashrate</h>
 						</div>
 						<div class="card-body">
 							<div class="card-chart ">
@@ -269,7 +811,7 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-lg-6 col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title"><span class="stamp stamp-md bg-green mr-3"><i class="fas fas fa-user"></i></span>Miners (Address)</h>
+							<h5 class="card-title"><span class="stamp stamp-md mr-3"><i class="fas fas fa-user"></i></span>Miners (Address)</h>
 						</div>
 						<div class="card-body">
 							<div class="card-chart ">
@@ -287,7 +829,7 @@ Apply one or more of the following classes to get the desired effect
 	
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="fas fa-bars"></i></span>
+						<span class="info-box-icon"><i class="fas fa-bars"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Blockchain Height</span>
 							<span class="info-box-number"><div id="blockchainHeight"></div></span>
@@ -297,7 +839,7 @@ Apply one or more of the following classes to get the desired effect
 			
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i class="fas fa-code-branch"></i></span>
+						<span class="info-box-icon"><i class="fas fa-code-branch"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Connected Peers</span>
 							<span class="info-box-number"><div id="connectedPeers"></div></span>
@@ -307,7 +849,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-red"><i class="fas fa-percent"></i></span>
+						<span class="info-box-icon"><i class="fas fa-percent"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Pool Fee</span>
 							<span class="info-box-number"><div id="poolFeePercent"></div></span>
@@ -317,7 +859,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-hammer"></i></span>
+						<span class="info-box-icon"><i class="fas fa-hammer"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Pool Effort</span>
 							<span class="info-box-number"><div id="poolEffort"></div></span>
@@ -327,7 +869,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="fas fa-cube"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cube"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Pending Blocks</span>
 							<span class="info-box-number"><div id="text_BlocksPending"></div></span>
@@ -337,7 +879,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i class="fas fa-cubes"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Confirmed Blocks</span>
 							<span class="info-box-number"><div id="poolBlocks"></div></span>
@@ -347,7 +889,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-red"><i class="fas fa-hand-holding-usd"></i></span>
+						<span class="info-box-icon"><i class="fas fa-hand-holding-usd"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Payment Threshold</span>
 							<span class="info-box-number"><div id="minimumPayment"></div></span>
@@ -357,7 +899,7 @@ Apply one or more of the following classes to get the desired effect
 			
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-credit-card"></i></span>
+						<span class="info-box-icon"><i class="fas fa-credit-card"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Total Paid</span>
 							<span class="info-box-number"><div id="totalPaid"></div></span>
@@ -367,7 +909,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="far fa-money-bill-alt"></i></span>
+						<span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Current Values</span>
 							<span class="info-box-number"><div id="value"></div></span>
@@ -377,7 +919,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i class="fas fa-chart-pie"></i></span>
+						<span class="info-box-icon"><i class="fas fa-chart-pie"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Block Reward</span>
 							<span class="info-box-number"><div id="text_BlockReward"></div></span>
@@ -387,7 +929,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-red"><i class="fas fa-dollar-sign"></i></span>
+						<span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Estimate Emissions (24H)</span>
 							<span class="info-box-number"><div id="Emissions"></div></span>
@@ -397,7 +939,7 @@ Apply one or more of the following classes to get the desired effect
 
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-clock"></i></span>
+						<span class="info-box-icon"><i class="fas fa-clock"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">NETWORK (VS) POOL</span>
 							<span class="info-box-number"><div id="text_TTFBlocks"></div></span>
@@ -411,7 +953,7 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-lg-6 col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title"><span class="stamp stamp-md bg-aqua mr-3"><i class="fas fa-wave-square"></i></span>Network Hashrate</h>
+							<h5 class="card-title"><span class="stamp stamp-md mr-3"><i class="fas fa-wave-square"></i></span>Network Hashrate</h>
 						</div>
 						<div class="card-body">
 							<div class="card-chart">
@@ -426,7 +968,7 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-lg-6 col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title"><span class="stamp stamp-md bg-aqua mr-3"><i class="fas fa-hammer"></i></span>Network Difficulty</h>
+							<h5 class="card-title"><span class="stamp stamp-md mr-3"><i class="fas fa-hammer"></i></span>Network Difficulty</h>
 						</div>
 						<div class="card-body">
 							<div class="card-chart ">
@@ -452,7 +994,7 @@ Apply one or more of the following classes to get the desired effect
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<div class="card">
-						<div class="card-header card-shadow bg-green">
+						<div class="card-header card-shadow">
 							<h3 class="card-title">Wallet Address</h3>
 							<p class="card-category">enter your coin wallet address</p>
 						</div>
@@ -477,24 +1019,24 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'Overview')" id="defaultOpen">Overview</button>
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'Workers')">Workers</button>
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'BlocksMiner')">Blocks</button>
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'Earnings')">Earnings</button>
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'Payouts')">Payouts</button>
-							<button class="btn bg-aqua tablinks" onclick="openCity(event, 'Setting')">Setting</button>
+							<button class="btn tablinks" onclick="openCity(event, 'Overview')" id="defaultOpen">Overview</button>
+							<button class="btn tablinks" onclick="openCity(event, 'Workers')">Workers</button>
+							<button class="btn tablinks" onclick="openCity(event, 'BlocksMiner')">Blocks</button>
+							<button class="btn tablinks" onclick="openCity(event, 'Earnings')">Earnings</button>
+							<button class="btn tablinks" onclick="openCity(event, 'Payouts')">Payouts</button>
+							<button class="btn tablinks" onclick="openCity(event, 'Setting')">Setting</button>
 						</div>
 						<div class="card-body">
 							<div id="Overview" class="tabcontent">
 								<div class="card">
-									<div class="card-header card-shadow bg-green">
+									<div class="card-header card-shadow">
 										<h5 class="card-category">General information</h>
 									</div>
 									<div class="row">
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<div class="card">
 												<div class="card-header">
-													<h5 class="card-title"><span class="stamp stamp-md bg-yellow mr-3"><i class="fas fa-chart-area"></i></span>Miner's Hash Rate</h>
+													<h5 class="card-title"><span class="stamp stamp-md mr-3"><i class="fas fa-chart-area"></i></span>Miner's Hash Rate</h>
 												</div>
 												<div class="card-body">
 													<div class="card-chart ">
@@ -511,7 +1053,7 @@ Apply one or more of the following classes to get the desired effect
 										<div class="row">
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-yellow"><i class="fas fa-receipt"></i></span>
+													<span class="info-box-icon"><i class="fas fa-receipt"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Pending Info:</span>
 														<span class="info-box-number"><div id="pendingBalance"></div></span>
@@ -520,7 +1062,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-aqua"><i class="fas fa-piggy-bank"></i></span>
+													<span class="info-box-icon"><i class="fas fa-piggy-bank"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Confirmed Coins<br>(to be paid)</span>
 														<span class="info-box-number"><div id="pendingBalance2"></div></span>
@@ -529,7 +1071,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-green"><i class="far fa-money-bill-alt"></i></span>
+													<span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Total Miner Share</span>
 														<span class="info-box-number"><div id="MinersShare"></div></span>
@@ -538,7 +1080,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-red"><i class="fas fa-dollar-sign"></i></span>
+													<span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Paid Info:</span>
 														<span class="info-box-number"><div id="paidBalance"></div></span>
@@ -547,7 +1089,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-yellow"><i class="fas fa-cubes"></i></span>
+													<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Block Found Recent</span>
 														<span class="info-box-number"><div id="BlocksByMiner"><br></div></span>
@@ -556,7 +1098,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-aqua"><i class="fa fa-coins"></i></span>
+													<span class="info-box-icon"><i class="fa fa-coins"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">24H Estimate</span>
 														<span class="info-box-number"><div id="MinersCoins"><br></div></span>
@@ -565,7 +1107,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-green"><i class="fas fa-wallet"></i></span>
+													<span class="info-box-icon"><i class="fas fa-wallet"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Last Payment</span>
 														<span class="info-box-number"><div id="lastPayment"><br></div></span>
@@ -574,7 +1116,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-red"><i class="fa fa-hand-holding-usd"></i></span>
+													<span class="info-box-icon"><i class="fa fa-hand-holding-usd"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Payment Threshold</span>
 														<span class="info-box-number"><div id="minPayment"></div></span>
@@ -583,7 +1125,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-yellow"><i class="fas fa-trophy"></i></span>
+													<span class="info-box-icon"><i class="fas fa-trophy"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Best Worker</span>
 														<span class="info-box-number"><div id="BestminerHashRate"></div></span>
@@ -592,7 +1134,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-aqua"><i class="fas fa-clock"></i></span>
+													<span class="info-box-icon"><i class="fas fa-clock"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Block Mining Time</span>
 														<span class="info-box-number"><div id="TTF_Blocks"></div></span>
@@ -601,7 +1143,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-green"><i class="fas fa-receipt"></i></span>
+													<span class="info-box-icon"><i class="fas fa-receipt"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Last Payment Link</span>
 														<span class="info-box-number"><div id="lastPaymentLink"></div></span>
@@ -610,7 +1152,7 @@ Apply one or more of the following classes to get the desired effect
 											</div>
 											<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 												<div class="info-box">
-													<span class="info-box-icon bg-red"><i class="fas fa-tachometer-alt"></i></span>
+													<span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
 													<div class="info-box-content">
 														<span class="info-box-text">Avg. Blocktime</span>
 														<span class="info-box-number"><div id="Blocktime"></div></span>
@@ -623,7 +1165,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div id="Workers" class="tabcontent">
 								<div class="card">
-									<div class="card-header bg-green">
+									<div class="card-header">
 										<h3 class="card-title "><p><i class="fas fa-users"></i> List of miners working for you</p></h3>
 									</div>
 									<div class="card-body table-hover">
@@ -649,7 +1191,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div id="Earnings" class="tabcontent">
 								<div class="card">
-									<div class="card-header card-shadow bg-green">
+									<div class="card-header card-shadow">
 										<h5 class="card-title"><i class="fas fa-balance-scale"></i> Last 30 Transactions</h>
 									</div>
 									<div class="card-body table-hover">
@@ -668,7 +1210,7 @@ Apply one or more of the following classes to get the desired effect
 									</div>
 								</div>
 								<div class="card">
-									<div class="card-header card-shadow bg-green">
+									<div class="card-header card-shadow">
 										<h5 class="card-title"><i class="fas fa-piggy-bank"></i> Daily Credit History</h>
 									</div>
 									<div class="card-body table-hover">
@@ -688,7 +1230,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div id="Payouts" class="tabcontent">
 								<div class="card">
-									<div class="card-header card-shadow bg-green">
+									<div class="card-header card-shadow">
 										<h5 class="card-category">Payouts History</h>
 									</div>
 									<div class="card-body table-hover">
@@ -712,7 +1254,7 @@ Apply one or more of the following classes to get the desired effect
 						<div class="row">
 							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-icon bg-green"><i class="fas fa-cube"></i></span>
+									<span class="info-box-icon"><i class="fas fa-cube"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text">Your Effort</span>
 										<span class="info-box-number"><div id="MinerEffort"><br></div></span>
@@ -721,7 +1263,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-icon bg-green"><i class="fas fa-cubes"></i></span>
+									<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text">Pool Effort</span>
 										<span class="info-box-number"><div id="BlocksEffort"><br></div></span>
@@ -730,7 +1272,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-icon bg-green"><i class="fas fa-cube"></i></span>
+									<span class="info-box-icon"><i class="fas fa-cube"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text">Avg. Uncle Rate</span>
 										<span class="info-box-number"><div id="AvgUncleRate"><br></div></span>
@@ -739,7 +1281,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-icon bg-green"><i class="fas fa-cubes"></i></span>
+									<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text">Avg. Orphaned Rate</span>
 										<span class="info-box-number"><div id="AvgOrphanedRate"><br></div></span>
@@ -749,7 +1291,7 @@ Apply one or more of the following classes to get the desired effect
 						</div>
 						<div class="row">
 							<div class="card">
-								<div class="card-header card-shadow bg-green">
+								<div class="card-header card-shadow">
 									<h5 class="card-title">Effort Your Blocks</h5>
 								</div>
 								<div class="card-body">
@@ -772,7 +1314,7 @@ Apply one or more of the following classes to get the desired effect
 						</div>
 						<div class="row">
 							<div class="card">
-								<div class="card-header card-shadow bg-green">
+								<div class="card-header card-shadow">
 									<h5 class="card-category">Blocks found by you</h>
 								</div>
 								<div class="card-body table-hover">
@@ -799,7 +1341,7 @@ Apply one or more of the following classes to get the desired effect
 					</div>
 							<div id="Setting" class="tabcontent">
 								<div class="card">	
-									<div class="card-header card-shadow bg-green">	
+									<div class="card-header card-shadow">	
 										<h5 class="card-title">Custom Minimun Payout</h3>
 										<p class="card-category">Must Be Greater Than Pool Minimum Payout</p>
 									</div>
@@ -858,7 +1400,7 @@ Apply one or more of the following classes to get the desired effect
 <div class="row">
 <div class="col-lg-12 col-md-12">
 <div class="card">
-<div class="card-header bg-red">
+<div class="card-header">
 <h3 class="card-title "><p><i class="fas fa-users"></i> Best Miners</p></h3>
 <p class="card-category"> Top 20 contributors</p>
 </div>
@@ -891,7 +1433,7 @@ Apply one or more of the following classes to get the desired effect
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-cubes"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Total Blocks</span>
 							<span class="info-box-number"><div id="poolBlocks2"></div></span>
@@ -900,7 +1442,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-credit-card"></i></span>
+						<span class="info-box-icon"><i class="fas fa-credit-card"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Total Paid</span>
 							<span class="info-box-number"><div id="totalPaid2"></div></span>
@@ -909,7 +1451,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="far fa-money-bill-alt"></i></span>
+						<span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Coin Value</span>
 							<span class="info-box-number"><div id="coinvalue"></div></span>
@@ -918,7 +1460,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-dollar-sign"></i></span>
+						<span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Block Reward</span>
 							<span class="info-box-number"><div id="blockreward"></div></span>
@@ -929,7 +1471,7 @@ Apply one or more of the following classes to get the desired effect
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-cube"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cube"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Current Effort</span>
 							<span class="info-box-number"><div id="CurrentEffort"><br></div></span>
@@ -938,7 +1480,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-cubes"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Average Effort</span>
 							<span class="info-box-number"><div id="AverageEffort"><br></div></span>
@@ -947,7 +1489,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-cube"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cube"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Average Uncle Rate</span>
 							<span class="info-box-number"><div id="AverageUncleRate"><br></div></span>
@@ -956,7 +1498,7 @@ Apply one or more of the following classes to get the desired effect
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-green"><i class="fas fa-cubes"></i></span>
+						<span class="info-box-icon"><i class="fas fa-cubes"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Average Orphaned Rate</span>
 							<span class="info-box-number"><div id="AverageOrphanedRate"><br></div></span>
@@ -968,14 +1510,14 @@ Apply one or more of the following classes to get the desired effect
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<button class="btn bg-aqua tablinks1" onclick="openCity1(event, 'Confirmed')" id="defaultOpen1"><span id="confirmedBlockCount"></span> Confirmed</button>
-							<button class="btn bg-aqua tablinks1" onclick="openCity1(event, 'Pending')"><span id="pendingBlockCount"></span> Pending</button>
-							<button class="btn bg-aqua tablinks1" onclick="openCity1(event, 'NewBlocks')"><span id="newBlockCount"></span> New</button>
+							<button class="btn tablinks1" onclick="openCity1(event, 'Confirmed')" id="defaultOpen1"><span id="confirmedBlockCount"></span> Confirmed</button>
+							<button class="btn tablinks1" onclick="openCity1(event, 'Pending')"><span id="pendingBlockCount"></span> Pending</button>
+							<button class="btn tablinks1" onclick="openCity1(event, 'NewBlocks')"><span id="newBlockCount"></span> New</button>
 						</div>
 						<div class="card-body">
 							<div id="NewBlocks" class="tabcontent1">
 								<div class="card">
-									<div class="card-header bg-green-gradient">
+									<div class="card-header">
 										<h3 class="card-title"><p><center>New Blocks</center></p></h3>
 									</div>
 									<div class="card-body table-hover">
@@ -1002,7 +1544,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div id="Pending" class="tabcontent1">
 								<div class="card">
-									<div class="card-header bg-green-gradient">
+									<div class="card-header">
 										<h3 class="card-title"><p><center>Pending Blocks</center></p></h3>
 									</div>
 									<div class="card-body table-hover">
@@ -1029,7 +1571,7 @@ Apply one or more of the following classes to get the desired effect
 							</div>
 							<div id="Confirmed" class="tabcontent1">
 								<div class="card">
-									<div class="card-header bg-green-gradient">
+									<div class="card-header">
 										<h3 class="card-title "><p><center>Confirmed Blocks</center></p></h3>
 									</div>
 									<div class="card-body table-hover">
@@ -1091,7 +1633,7 @@ Apply one or more of the following classes to get the desired effect
 		  <div class="row">
 			<div class="col-lg-12 col-md-12">
               <div class="card">
-                <div class="card-header bg-aqua">
+                <div class="card-header">
                   <h3 class="card-title "><p><i class="fas fa-wallet"></i> Payments Rewarded</p></h3>
                   <p class="card-category"> Last 500 payments</p>
                 </div>
@@ -1127,7 +1669,7 @@ Apply one or more of the following classes to get the desired effect
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<div class="card">
-                		<div class="card-header bg-maroon-gradient">
+                		<div class="card-header">
 							<h3 class="card-title "><p><i class="fas fa-plug"></i> Pool Configuration</p></h3>
 							<p class="card-category"> All you need to connect your miners</p>
 						</div>
@@ -1164,7 +1706,7 @@ Apply one or more of the following classes to get the desired effect
 		  <div class="row">
                 <div class="col-lg-12 col-sm-12">
                   <div class="card">
-                    <div class="card-header bg-black-gradient">
+                    <div class="card-header">
 						<h4 class="card-title"><i class="fas fa-comment-dots"></i> FAQ</h4>
 						<p class="card-category">
 							How does the pool work?
@@ -1253,14 +1795,14 @@ Apply one or more of the following classes to get the desired effect
                         much shares are considered for reward. This is very easy
                         with proportional reward system. While using PPLNS, this
                         is no longer true. On long rounds (like round five
-                        above) the pool hoppers shares won’t be considered for
+                        above) the pool hoppers shares won't be considered for
                         reward calculations in favor of loyal miners. This is
                         due to the fact that pool hoppers only mine on the
                         beginning of rounds. On short and normal rounds pool
-                        hoppers won’t lose their shares. Due to the fact that
+                        hoppers won't lose their shares. Due to the fact that
                         shares from previous rounds from loyal miners are
                         considered twice (or even more often on extremely short
-                        rounds) the pool hopper won’t get the same reward as
+                        rounds) the pool hopper won't get the same reward as
                         from proportional reward system.
                       </p>
                       <p>
@@ -1325,10 +1867,11 @@ Apply one or more of the following classes to get the desired effect
 		  <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <div class="card">
-                   <div class="card-header bg-teal-gradient"><h4 class="title"><i class="ti-headphone-alt"></i> Support</h4></div>
-                    <div class="content table-responsive table-full-width">
-                      <img style="width:300px;" src="img/discord.png" alt="Discord"> 
-                    </div>
+                  <div class="content table-responsive table-full-width">
+ 			 <a href="https://discord.gg/ZyG3YKDCQQ" target="_blank">
+			    <img style="width:300px;" src="img/discord.png" alt="Discord">
+ 			 </a>
+			</div>
                 </div>
             </div>
           </div>
@@ -1338,7 +1881,7 @@ Apply one or more of the following classes to get the desired effect
   </div> 
 
   <footer class="main-footer">
-    	<strong><a target="_blank" href="https://github.com/xiaolin1579/Miningcore.WebUI">&copy; <script>document.write(new Date().getFullYear())</script> made by EvePool.pw</a></strong>
+    	<strong><a target="_blank" href="https://1miner.net">&copy; <script>document.write(new Date().getFullYear())</script> 1miner.net - Made By DankMiner</a></strong>
   </footer>
  
   </div> <!-- end main-pool -->
@@ -1352,4 +1895,3 @@ Apply one or more of the following classes to get the desired effect
   </script>
 
 </body>
-</html>
